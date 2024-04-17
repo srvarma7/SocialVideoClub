@@ -1,0 +1,43 @@
+{
+    "data":
+    {
+        "posts":
+        [
+            {
+                "likes": 39,
+                "postId": "a52ebd3c-f372-4d39-b740-8857f578a8fe",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/2412461/eb2b8307-0d10-4387-8f57-8b0313203f7avoke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/308/d8a42c02-ca1e-43cb-8c22-3df252289ae6/hls1.0/prod/image.0000005.jpg",
+                "username": "Rishikaa",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/308/d8a42c02-ca1e-43cb-8c22-3df252289ae6/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 1,
+                "postId": "128c74eb-15fa-433c-85b9-924626979371",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/2412461/eb2b8307-0d10-4387-8f57-8b0313203f7avoke.jpg",
+                "thumbnail_url": "https://images.kooapp.com/gmedia/transcode_input/thumb/thumb-00001.jpg",
+                "username": "Rishikaa",
+                "videoUrl": "https://gcs-media.kooapp.com/transcode_input/2412461/premium1689355327042rclhjq.mp4"
+            },
+            {
+                "likes": 1,
+                "postId": "ba506882-87ce-47a5-a920-32247385ae24",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/2412461/eb2b8307-0d10-4387-8f57-8b0313203f7avoke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2024/98/2449A8E4-5A27-4C77-906F-0E327B879F36/hls1.0/prod/image.0000003.jpg",
+                "username": "Rishikaa",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2024/98/2449A8E4-5A27-4C77-906F-0E327B879F36/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 1,
+                "postId": "fd564d34-5540-4feb-948e-e645b6c2269f",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/2412461/eb2b8307-0d10-4387-8f57-8b0313203f7avoke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2024/85/DD6527F9-5DF2-46B8-B466-2DFE7FE45697/hls1.0/prod/image.0000005.jpg",
+                "username": "Rishikaa",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2024/85/DD6527F9-5DF2-46B8-B466-2DFE7FE45697/hls1.0/prod/out.m3u8"
+            }
+        ],
+        "profilePictureUrl": "https://images.kooapp.com/gprofiles/profiles/2412461/eb2b8307-0d10-4387-8f57-8b0313203f7avoke.jpg",
+        "username": "Rishikaa"
+    },
+    "status": "success"
+}

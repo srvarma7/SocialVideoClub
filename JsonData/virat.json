@@ -1,0 +1,83 @@
+{
+    "data":
+    {
+        "posts":
+        [
+            {
+                "likes": 393,
+                "postId": "7083a0bf-814e-4c6f-b845-49e939bca787",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/352/3i7r77z4-42889hne-flm3zhgu-83lz1nd9/hls1.0/prod/image.0000004.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/352/3i7r77z4-42889hne-flm3zhgu-83lz1nd9/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 283,
+                "postId": "f738c9b0-adc5-4ea6-af44-2803be936fa4",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/347/wqrolie0-xsdz4brk-w79yijzx-5l922h5m/hls1.0/prod/image.0000003.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/347/wqrolie0-xsdz4brk-w79yijzx-5l922h5m/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 283,
+                "postId": "022264f1-7537-4c62-851d-1248aa232876",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/347/wqrolie0-xsdz4brk-w79yijzx-5l922h5m/hls1.0/prod/image.0000003.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/345/adqbzxes-vn9r3ghj-07b4ytvo-xect50sb/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 250,
+                "postId": "aa6ab1d9-e607-47fa-9ce7-efd074e71d72",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/340/9qchkf7i-wwyqcoq9-00hjui55-hvmnd749/hls1.0/prod/image.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/340/9qchkf7i-wwyqcoq9-00hjui55-hvmnd749/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 228,
+                "postId": "8439c744-2c51-4bbb-b739-9ac7dc052219",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/338/j3csc98x-aq55kp35-hiq513xi-nabxdr6f/hls1.0/prod/image.0000005.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/338/j3csc98x-aq55kp35-hiq513xi-nabxdr6f/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 800,
+                "postId": "9ca5ff25-0545-472a-abe3-d051a66d10b4",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/336/4e14666a-26ad-4b13-8525-e43e720618ac/hls1.0/prod/image.0000003.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/336/4e14666a-26ad-4b13-8525-e43e720618ac/hls1.0/prod/out.m3u8 - "
+            },
+            {
+                "likes": 298,
+                "postId": "3d50ddd1-9113-47b0-b480-2f0e6613388a",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/333/nrdi8g3h-l2n1rgh3-x4ngs9vl-62jkqbgs/hls1.0/prod/image.0000003.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/333/nrdi8g3h-l2n1rgh3-x4ngs9vl-62jkqbgs/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 647,
+                "postId": "177f79e2-e1f5-4708-85f1-10cd104140c6",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/274/fcbe6fc9-5b18-473f-a890-1eb4bab89816/hls1.0/prod/image.0000003.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/274/fcbe6fc9-5b18-473f-a890-1eb4bab89816/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 376,
+                "postId": "0265da85-701b-4992-8819-44d396d16b48",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/274/vlkpmqjw-b6lxk2m9-9jnlqc68-2o4oi807/hls1.0/prod/image.0000003.jpg",
+                "username": "Virat",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/274/vlkpmqjw-b6lxk2m9-9jnlqc68-2o4oi807/hls1.0/prod/out.m3u8"
+            }
+        ],
+        "profilePictureUrl": "https://images.kooapp.com/gprofiles/profiles/11664193/c05e75f0-ba92-4d0c-9b30-fcebaf6b3cf8voke.jpg",
+        "username": "Virat"
+    },
+    "status": "success"
+}

@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF425BA12BCEBA67004799CF /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BA02BCEBA67004799CF /* NetworkProvider.swift */; };
+		DF425BA32BCEBC11004799CF /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BA22BCEBC11004799CF /* ProfileService.swift */; };
+		DF425BA72BCEDEC8004799CF /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BA62BCEDEC8004799CF /* PostModel.swift */; };
+		DF425BA92BCEE1FD004799CF /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BA82BCEE1FD004799CF /* FeedService.swift */; };
+		DF425BAB2BCEE20F004799CF /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BAA2BCEE20F004799CF /* PostService.swift */; };
+		DF425BAE2BCF8B62004799CF /* SocialClubServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BAD2BCF8B62004799CF /* SocialClubServiceType.swift */; };
+		DF425BB02BCF8E2C004799CF /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BAF2BCF8E2C004799CF /* ResponseHandler.swift */; };
+		DF425BB42BCF9D95004799CF /* FeedNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BB32BCF9D95004799CF /* FeedNetworkManager.swift */; };
 		DF5F16F92BCE9A5F009792B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F16F82BCE9A5F009792B2 /* AppDelegate.swift */; };
 		DF5F16FB2BCE9A5F009792B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F16FA2BCE9A5F009792B2 /* SceneDelegate.swift */; };
-		DF5F16FD2BCE9A5F009792B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F16FC2BCE9A5F009792B2 /* ViewController.swift */; };
+		DF5F16FD2BCE9A5F009792B2 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F16FC2BCE9A5F009792B2 /* MainVC.swift */; };
 		DF5F17002BCE9A5F009792B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF5F16FE2BCE9A5F009792B2 /* Main.storyboard */; };
 		DF5F17022BCE9A61009792B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF5F17012BCE9A61009792B2 /* Assets.xcassets */; };
 		DF5F17052BCE9A61009792B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF5F17032BCE9A61009792B2 /* LaunchScreen.storyboard */; };
@@ -36,10 +44,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF425BA02BCEBA67004799CF /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		DF425BA22BCEBC11004799CF /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		DF425BA62BCEDEC8004799CF /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		DF425BA82BCEE1FD004799CF /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		DF425BAA2BCEE20F004799CF /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		DF425BAD2BCF8B62004799CF /* SocialClubServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialClubServiceType.swift; sourceTree = "<group>"; };
+		DF425BAF2BCF8E2C004799CF /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
+		DF425BB32BCF9D95004799CF /* FeedNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNetworkManager.swift; sourceTree = "<group>"; };
 		DF5F16F52BCE9A5F009792B2 /* SocialVideoClub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialVideoClub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5F16F82BCE9A5F009792B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF5F16FA2BCE9A5F009792B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DF5F16FC2BCE9A5F009792B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DF5F16FC2BCE9A5F009792B2 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		DF5F16FF2BCE9A5F009792B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DF5F17012BCE9A61009792B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF5F17042BCE9A61009792B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,6 +92,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF425B9A2BCEB5FE004799CF /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				DF5F16FE2BCE9A5F009792B2 /* Main.storyboard */,
+				DF5F17032BCE9A61009792B2 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		DF425B9C2BCEB627004799CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DF425B9F2BCEBA55004799CF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DF425BA02BCEBA67004799CF /* NetworkProvider.swift */,
+				DF425BAF2BCF8E2C004799CF /* ResponseHandler.swift */,
+				DF425BAC2BCF8B4E004799CF /* Services */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		DF425BA52BCEDEC0004799CF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DF425BA62BCEDEC8004799CF /* PostModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DF425BAC2BCF8B4E004799CF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DF425BAD2BCF8B62004799CF /* SocialClubServiceType.swift */,
+				DF425BA82BCEE1FD004799CF /* FeedService.swift */,
+				DF425BB32BCF9D95004799CF /* FeedNetworkManager.swift */,
+				DF425BAA2BCEE20F004799CF /* PostService.swift */,
+				DF425BA22BCEBC11004799CF /* ProfileService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		DF5F16EC2BCE9A5F009792B2 = {
 			isa = PBXGroup;
 			children = (
@@ -101,10 +163,12 @@
 			children = (
 				DF5F16F82BCE9A5F009792B2 /* AppDelegate.swift */,
 				DF5F16FA2BCE9A5F009792B2 /* SceneDelegate.swift */,
-				DF5F16FC2BCE9A5F009792B2 /* ViewController.swift */,
-				DF5F16FE2BCE9A5F009792B2 /* Main.storyboard */,
+				DF5F16FC2BCE9A5F009792B2 /* MainVC.swift */,
+				DF425BA52BCEDEC0004799CF /* Models */,
+				DF425B9F2BCEBA55004799CF /* Network */,
+				DF425B9C2BCEB627004799CF /* Extensions */,
+				DF425B9A2BCEB5FE004799CF /* Storyboard */,
 				DF5F17012BCE9A61009792B2 /* Assets.xcassets */,
-				DF5F17032BCE9A61009792B2 /* LaunchScreen.storyboard */,
 				DF5F17062BCE9A61009792B2 /* Info.plist */,
 			);
 			path = SocialVideoClub;
@@ -258,9 +322,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF5F16FD2BCE9A5F009792B2 /* ViewController.swift in Sources */,
+				DF5F16FD2BCE9A5F009792B2 /* MainVC.swift in Sources */,
+				DF425BA92BCEE1FD004799CF /* FeedService.swift in Sources */,
 				DF5F16F92BCE9A5F009792B2 /* AppDelegate.swift in Sources */,
+				DF425BB42BCF9D95004799CF /* FeedNetworkManager.swift in Sources */,
+				DF425BB02BCF8E2C004799CF /* ResponseHandler.swift in Sources */,
+				DF425BA12BCEBA67004799CF /* NetworkProvider.swift in Sources */,
+				DF425BA72BCEDEC8004799CF /* PostModel.swift in Sources */,
 				DF5F16FB2BCE9A5F009792B2 /* SceneDelegate.swift in Sources */,
+				DF425BAB2BCEE20F004799CF /* PostService.swift in Sources */,
+				DF425BAE2BCF8B62004799CF /* SocialClubServiceType.swift in Sources */,
+				DF425BA32BCEBC11004799CF /* ProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,51 @@
+{
+    "data":
+    {
+        "posts":
+        [
+            {
+                "likes": 39,
+                "postId": "4fd026f3-786c-41cf-b540-5a832689ff28",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/4269899/73278BA5-1CBD-4D09-ABA0-0CFE4F0F5330-profile.jpeg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2024/73/2F10F91A-900F-4DAD-9E60-FE4AEEFE86D8/hls1.0/prod/image.0000001.jpg",
+                "username": "Sai",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2024/73/2F10F91A-900F-4DAD-9E60-FE4AEEFE86D8/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 3,
+                "postId": "3a028e83-701a-4bf3-9d57-91cd4463fcf3",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/4269899/73278BA5-1CBD-4D09-ABA0-0CFE4F0F5330-profile.jpeg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/338/C2540396-9B6A-4816-B58D-C56814AA984B/hls1.0/prod/image.0000004.jpg",
+                "username": "Sai",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/338/C2540396-9B6A-4816-B58D-C56814AA984B/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 9,
+                "postId": "e4e74de3-de67-4032-94fc-45b52dc2eaee",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/4269899/73278BA5-1CBD-4D09-ABA0-0CFE4F0F5330-profile.jpeg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/193/D4D8527B-AEC8-487B-A28E-FB4C080CF494/hls1.0/prod/image.jpg",
+                "username": "Sai",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/193/D4D8527B-AEC8-487B-A28E-FB4C080CF494/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 139,
+                "postId": "6f8c6570-8505-4edc-8a85-b1e85f34efc8",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/4269899/73278BA5-1CBD-4D09-ABA0-0CFE4F0F5330-profile.jpeg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/193/A56E6B3A-EA57-4A8B-9CC1-866BA5A0ECB3/hls1.0/prod/image.0000001.jpg",
+                "username": "Sai",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/193/A56E6B3A-EA57-4A8B-9CC1-866BA5A0ECB3/hls1.0/prod/out.m3u8"
+            },
+            {
+                "likes": 239,
+                "postId": "e3315c19-858c-4e89-b5d5-86d9308aeb93",
+                "profile_image": "https://images.kooapp.com/gprofiles/profiles/4269899/73278BA5-1CBD-4D09-ABA0-0CFE4F0F5330-profile.jpeg",
+                "thumbnail_url": "https://gcs-media.kooapp.com/vhls/2023/193/72C37BFB-811C-4A0E-8BA0-2E9C26882ADB/hls1.0/prod/image.0000002.jpg",
+                "username": "Sai",
+                "videoUrl": "https://gcs-media.kooapp.com/vhls/2023/193/72C37BFB-811C-4A0E-8BA0-2E9C26882ADB/hls1.0/prod/out.m3u8"
+            }
+        ],
+        "profilePictureUrl": "https://images.kooapp.com/gprofiles/profiles/4269899/73278BA5-1CBD-4D09-ABA0-0CFE4F0F5330-profile.jpeg",
+        "username": "Sai"
+    },
+    "status": "success"
+}
