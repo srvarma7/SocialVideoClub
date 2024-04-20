@@ -35,13 +35,13 @@ class ClubTableViewDataSource: UITableViewDiffableDataSource<Section, Row> {
                     if token == FeedToken.isLoading {
                         let loadingCell = tableView.dequeueReusableCell(withIdentifier: LoadingCell.id, for: indexPath) as! LoadingCell
                         return loadingCell
-                    }
-                    
-                    if token == FeedToken.hasNoMoreFeed || token == FeedToken.networkError {
+                    } else if token.isMessage {
                         let messageCell = tableView.dequeueReusableCell(withIdentifier: MessageCell.id, for: indexPath) as! MessageCell
                         messageCell.messageImageView.image  = token.image
                         messageCell.messageLabel.text       = token.description
                         return messageCell
+                    } else {
+                        assertionFailure("Unknown kind. Cell not provided")
                     }
             }
             
@@ -63,6 +63,8 @@ class ClubTableViewDataSource: UITableViewDiffableDataSource<Section, Row> {
             }
         }
         
-        apply(snapshot, animatingDifferences: animated)
+        DispatchQueue.main.async {
+            self.apply(snapshot, animatingDifferences: animated)
+        }
     }
 }

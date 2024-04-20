@@ -54,6 +54,10 @@ extension PostVC: PostViewModelDelegate {
     func didFetchPost() {
         refreshControl.endRefreshing()
     }
+    
+    func didFetchPostFailed(_ error: Error) {
+        refreshControl.endRefreshing()
+    }
 }
 
 extension PostVC {

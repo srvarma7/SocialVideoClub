@@ -37,7 +37,6 @@ final class MessageCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        contentView.backgroundColor = .brown
         
         setupViews()
         isUserInteractionEnabled = false
@@ -51,7 +50,6 @@ final class MessageCell: UITableViewCell {
 
 extension MessageCell {
     private func setupViews() {
-        
         contentView.addSubview(stackView)
         stackView.easy.layout(
             CenterY(),

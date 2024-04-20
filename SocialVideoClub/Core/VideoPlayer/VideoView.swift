@@ -109,6 +109,8 @@ class VideoView: UIView {
                 } else {
                     self?.player?.replaceCurrentItem(with: self?.playerItem!)
                 }
+                self?.player?.isMuted = false
+                self?.player?.volume = 1
             }
         }
     }

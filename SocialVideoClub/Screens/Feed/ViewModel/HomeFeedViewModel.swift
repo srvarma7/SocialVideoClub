@@ -113,6 +113,10 @@ class HomeFeedViewModel: TableBindableViewModel {
             newObjects.append(FeedToken.networkError)
         }
         
+        if newObjects.isEmpty {
+            newObjects.append(FeedToken.noPosts)
+        }
+        
         self.objects = newObjects
         
         dataSource?.update(objects: objects)

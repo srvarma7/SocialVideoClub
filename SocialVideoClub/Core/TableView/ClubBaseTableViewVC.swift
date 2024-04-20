@@ -167,6 +167,6 @@ extension ClubBaseTableViewVC: UITableViewDelegate {
             }
         }
         
-        return UITableView.automaticDimension
+        return MessageCell.height // default height
     }
 }
