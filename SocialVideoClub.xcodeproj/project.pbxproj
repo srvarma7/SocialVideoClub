@@ -102,7 +102,7 @@
 		DF425BDD2BCFFAAA004799CF /* PostServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceManager.swift; sourceTree = "<group>"; };
 		DF44A5DB2BD3AD5F00F451B8 /* ClubTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewDataSource.swift; sourceTree = "<group>"; };
 		DF44A5DD2BD3B4DF00F451B8 /* ClubBaseTableViewVC+VideoCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClubBaseTableViewVC+VideoCellDelegate.swift"; sourceTree = "<group>"; };
-		DF5F16F52BCE9A5F009792B2 /* SocialVideoClub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialVideoClub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF5F16F52BCE9A5F009792B2 /* SocialClub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialClub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5F16F82BCE9A5F009792B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF5F16FA2BCE9A5F009792B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DF5F16FC2BCE9A5F009792B2 /* HomeFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedVC.swift; sourceTree = "<group>"; };
@@ -339,7 +339,7 @@
 		DF5F16F62BCE9A5F009792B2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DF5F16F52BCE9A5F009792B2 /* SocialVideoClub.app */,
+				DF5F16F52BCE9A5F009792B2 /* SocialClub.app */,
 				DF5F170B2BCE9A61009792B2 /* SocialVideoClubTests.xctest */,
 				DF5F17152BCE9A61009792B2 /* SocialVideoClubUITests.xctest */,
 			);
@@ -432,7 +432,7 @@
 				DF425BC42BCFAE19004799CF /* SDWebImage */,
 			);
 			productName = SocialVideoClub;
-			productReference = DF5F16F52BCE9A5F009792B2 /* SocialVideoClub.app */;
+			productReference = DF5F16F52BCE9A5F009792B2 /* SocialClub.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DF5F170A2BCE9A61009792B2 /* SocialVideoClubTests */ = {
@@ -783,7 +783,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.talk.SocialVideoClub;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SocialClub;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -812,7 +812,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.talk.SocialVideoClub;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SocialClub;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
