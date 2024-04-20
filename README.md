@@ -1,11 +1,10 @@
 # Social Club
 
-Showrtlist favourite frogs for later<br>
+|         Home        |        Post        |       Profile         |
+| ------------------- | ------------------ | --------------------- |
+| ![](Demo/home.PNG)  | ![](Demo/post.PNG) | ![](Demo/profile.PNG) |
 
-|         Home        |        Post        |       Profile         |         Demo        |
-| ------------------- | ------------------ | --------------------- | ------------------- |
-| ![](Demo/home.PNG)  | ![](Demo/post.PNG) | ![](Demo/profile.PNG) | ![](Demo/video.mp4) |
-
+ 
 ## UI inspiration from Instagram
     - As it is heavy in video content
     - and have a benchmark for standards 
