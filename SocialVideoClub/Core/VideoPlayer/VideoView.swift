@@ -73,7 +73,7 @@ class VideoView: UIView {
                 if isPlayable {
                     completion?(asset)
                 } else {
-                    print("failed")
+                    print("Cannot play video")
                 }
             } catch(let error) {
                 print(error.localizedDescription)
@@ -152,14 +152,17 @@ class VideoView: UIView {
             
             switch status {
                 case .readyToPlay:
-                    print(".readyToPlay")
+//                    print(".readyToPlay")
                     delegate?.playerReadyToPlay()
                 case .failed:
                     print(".failed")
+                    break
                 case .unknown:
                     print(".unknown")
+                    break
                 @unknown default:
                     print("@unknown default")
+                    break
             }
         }
     }

@@ -5,7 +5,7 @@
 //  Created by Sai Raghu Varma Kallepalli on 17/04/24.
 //
 
-import Foundation
+import UIKit
 
 import OSLog
 private let logger = Logger(subsystem: "com.SocialVideoClub", category: "HomeFeedViewModel")
@@ -15,9 +15,17 @@ protocol HomeFeedDelegate: AnyObject {
     func didFetchFeedFailed()
 }
 
-class HomeFeedViewModel {
-    weak var delegate: HomeFeedDelegate?
+protocol TableBindableViewModel {
+    var dataSource: ClubTableViewDataSource? { get }
+    func updateObject(animated: Bool)
+}
+
+
+
+class HomeFeedViewModel: TableBindableViewModel {
+    weak var dataSource: ClubTableViewDataSource?
     
+    weak var delegate: HomeFeedDelegate?
     let feedService: FeedServiceManageable
     
     var objects: [Any] = []
@@ -25,12 +33,13 @@ class HomeFeedViewModel {
     private var networkError = false
     
     
-    private var _posts: [PostModel] = []
+    private (set) var _posts: [PostModel] = []
     private var pageCount = 0
     private (set) var isFetching: Bool = false
     
     init(feedService: FeedServiceManageable = FeedServiceManager()) {
         self.feedService = feedService
+        
     }
     
     func fetchLatestFeed() {
@@ -39,13 +48,14 @@ class HomeFeedViewModel {
         fetchPosts()
     }
     
+    /// Fetch posts and paginate calls
     func fetchPosts() {
         guard isFetching == false && hasMoreFeed else {
             return
         }
         
         isFetching = true
-        updateObjects()
+        updateObject()
         DispatchQueue.global().async { [weak self] in
             guard let self else {
                 return
@@ -69,12 +79,12 @@ class HomeFeedViewModel {
                             self.pageCount += 1
                         }
                         
-                        self.updateObjects()
+                        self.updateObject()
                         self.delegate?.didFetchFeed()
                     case .failure(let failure):
                         logger.error("\(failure.localizedDescription)")
                         self.networkError = true
-                        self.updateObjects()
+                        self.updateObject()
                         self.delegate?.didFetchFeedFailed()
                 }
                 
@@ -82,7 +92,7 @@ class HomeFeedViewModel {
         }
     }
     
-    func updateObjects() {
+    func updateObject(animated: Bool = true) {
         var newObjects: [Any] = []
         
         if !_posts.isEmpty {
@@ -102,43 +112,47 @@ class HomeFeedViewModel {
         }
         
         self.objects = newObjects
+        
+        dataSource?.update(objects: objects)
     }
-    
-//    /// Using async/await
-//    func fetchPosts() {
-//        guard isFetching == false else {
-//            return
-//        }
-//        
-//        isFetching = true
-//        
-//        DispatchQueue.global().async {
-//            Task { [weak self] in
-//                guard let self else {
-//                    return
-//                }
-//                
-//                let result = await self.feedService.fetchNextFeed(page: pageCount)
-//                switch result {
-//                    case .success(let newPosts):
-//                        if pageCount == 0 {
-//                            self.posts = newPosts
-//                        } else {
-//                            self.posts.append(contentsOf: newPosts)
-//                        }
-//                        pageCount += 1
-//                        DispatchQueue.main.async {
-//                            self.delegate?.didFetchFeed()
-//                        }
-//                    case .failure(let failure):
-//                        print(failure)
-//                        DispatchQueue.main.async {
-//                            self.delegate?.didFetchFeedFailed()
-//                        }
-//                        
-//                }
-//                isFetching = false
-//            }
-//        }
-//    }
+}
+
+extension HomeFeedViewModel {
+    //    /// Using async/await
+    //    func fetchPosts() {
+    //        guard isFetching == false else {
+    //            return
+    //        }
+    //
+    //        isFetching = true
+    //
+    //        DispatchQueue.global().async {
+    //            Task { [weak self] in
+    //                guard let self else {
+    //                    return
+    //                }
+    //
+    //                let result = await self.feedService.fetchNextFeed(page: pageCount)
+    //                switch result {
+    //                    case .success(let newPosts):
+    //                        if pageCount == 0 {
+    //                            self.posts = newPosts
+    //                        } else {
+    //                            self.posts.append(contentsOf: newPosts)
+    //                        }
+    //                        pageCount += 1
+    //                        DispatchQueue.main.async {
+    //                            self.delegate?.didFetchFeed()
+    //                        }
+    //                    case .failure(let failure):
+    //                        print(failure)
+    //                        DispatchQueue.main.async {
+    //                            self.delegate?.didFetchFeedFailed()
+    //                        }
+    //
+    //                }
+    //                isFetching = false
+    //            }
+    //        }
+    //    }
 }

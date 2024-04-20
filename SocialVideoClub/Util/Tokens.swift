@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Tokens {
+enum Tokens: Hashable {
     case isLoading
 //    case isRefreshing     = "List.isRefreshing"
     case hasNoMoreFeed

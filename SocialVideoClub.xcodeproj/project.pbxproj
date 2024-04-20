@@ -24,7 +24,7 @@
 		DF425BAE2BCF8B62004799CF /* SocialClubServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BAD2BCF8B62004799CF /* SocialClubServiceType.swift */; };
 		DF425BB02BCF8E2C004799CF /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BAF2BCF8E2C004799CF /* ResponseHandler.swift */; };
 		DF425BB42BCF9D95004799CF /* FeedServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BB32BCF9D95004799CF /* FeedServiceManager.swift */; };
-		DF425BBA2BCFA36B004799CF /* TableViewFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BB92BCFA36B004799CF /* TableViewFeedVC.swift */; };
+		DF425BBA2BCFA36B004799CF /* ClubBaseTableViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BB92BCFA36B004799CF /* ClubBaseTableViewVC.swift */; };
 		DF425BBD2BCFA3C5004799CF /* EasyPeasy in Frameworks */ = {isa = PBXBuildFile; productRef = DF425BBC2BCFA3C5004799CF /* EasyPeasy */; };
 		DF425BBF2BCFA5FD004799CF /* HomeFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BBE2BCFA5FD004799CF /* HomeFeedViewModel.swift */; };
 		DF425BC22BCFA8D0004799CF /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BC12BCFA8D0004799CF /* PostCell.swift */; };
@@ -37,6 +37,8 @@
 		DF425BD62BCFF8E6004799CF /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BD52BCFF8E6004799CF /* PostVC.swift */; };
 		DF425BDB2BCFF9EB004799CF /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BDA2BCFF9EB004799CF /* PostViewModel.swift */; };
 		DF425BDE2BCFFAAA004799CF /* PostServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF425BDD2BCFFAAA004799CF /* PostServiceManager.swift */; };
+		DF44A5DC2BD3AD5F00F451B8 /* ClubTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF44A5DB2BD3AD5F00F451B8 /* ClubTableViewDataSource.swift */; };
+		DF44A5DE2BD3B4DF00F451B8 /* ClubBaseTableViewVC+VideoCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF44A5DD2BD3B4DF00F451B8 /* ClubBaseTableViewVC+VideoCellDelegate.swift */; };
 		DF5F16F92BCE9A5F009792B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F16F82BCE9A5F009792B2 /* AppDelegate.swift */; };
 		DF5F16FB2BCE9A5F009792B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F16FA2BCE9A5F009792B2 /* SceneDelegate.swift */; };
 		DF5F16FD2BCE9A5F009792B2 /* HomeFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F16FC2BCE9A5F009792B2 /* HomeFeedVC.swift */; };
@@ -88,7 +90,7 @@
 		DF425BAD2BCF8B62004799CF /* SocialClubServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialClubServiceType.swift; sourceTree = "<group>"; };
 		DF425BAF2BCF8E2C004799CF /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
 		DF425BB32BCF9D95004799CF /* FeedServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedServiceManager.swift; sourceTree = "<group>"; };
-		DF425BB92BCFA36B004799CF /* TableViewFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFeedVC.swift; sourceTree = "<group>"; };
+		DF425BB92BCFA36B004799CF /* ClubBaseTableViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubBaseTableViewVC.swift; sourceTree = "<group>"; };
 		DF425BBE2BCFA5FD004799CF /* HomeFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewModel.swift; sourceTree = "<group>"; };
 		DF425BC12BCFA8D0004799CF /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		DF425BC62BCFAF75004799CF /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -99,6 +101,8 @@
 		DF425BD52BCFF8E6004799CF /* PostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		DF425BDA2BCFF9EB004799CF /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		DF425BDD2BCFFAAA004799CF /* PostServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceManager.swift; sourceTree = "<group>"; };
+		DF44A5DB2BD3AD5F00F451B8 /* ClubTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewDataSource.swift; sourceTree = "<group>"; };
+		DF44A5DD2BD3B4DF00F451B8 /* ClubBaseTableViewVC+VideoCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClubBaseTableViewVC+VideoCellDelegate.swift"; sourceTree = "<group>"; };
 		DF5F16F52BCE9A5F009792B2 /* SocialVideoClub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialVideoClub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5F16F82BCE9A5F009792B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF5F16FA2BCE9A5F009792B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -400,8 +404,10 @@
 		DFFD560B2BD2397D00D71BAC /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				DF44A5DB2BD3AD5F00F451B8 /* ClubTableViewDataSource.swift */,
+				DF425BB92BCFA36B004799CF /* ClubBaseTableViewVC.swift */,
+				DF44A5DD2BD3B4DF00F451B8 /* ClubBaseTableViewVC+VideoCellDelegate.swift */,
 				DFFD560C2BD239B100D71BAC /* Cells */,
-				DF425BB92BCFA36B004799CF /* TableViewFeedVC.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -578,11 +584,13 @@
 				DF425BA12BCEBA67004799CF /* NetworkProvider.swift in Sources */,
 				DF425BBF2BCFA5FD004799CF /* HomeFeedViewModel.swift in Sources */,
 				DF425BA72BCEDEC8004799CF /* PostModel.swift in Sources */,
+				DF44A5DE2BD3B4DF00F451B8 /* ClubBaseTableViewVC+VideoCellDelegate.swift in Sources */,
 				DF425BD62BCFF8E6004799CF /* PostVC.swift in Sources */,
 				DF0103762BD0CAC300E3B3A8 /* ProfileResponseModel.swift in Sources */,
+				DF44A5DC2BD3AD5F00F451B8 /* ClubTableViewDataSource.swift in Sources */,
 				DF0103742BD0CA8C00E3B3A8 /* PostResponseModel.swift in Sources */,
 				DF425BDB2BCFF9EB004799CF /* PostViewModel.swift in Sources */,
-				DF425BBA2BCFA36B004799CF /* TableViewFeedVC.swift in Sources */,
+				DF425BBA2BCFA36B004799CF /* ClubBaseTableViewVC.swift in Sources */,
 				DF0103822BD0FB3E00E3B3A8 /* ProfileViewModel.swift in Sources */,
 				DF5F16FB2BCE9A5F009792B2 /* SceneDelegate.swift in Sources */,
 				DFFD560E2BD239EF00D71BAC /* LoadingCell.swift in Sources */,
@@ -772,7 +780,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G43DLT797F;
+				DEVELOPMENT_TEAM = 7H62X7A726;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialVideoClub/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -801,7 +809,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G43DLT797F;
+				DEVELOPMENT_TEAM = 7H62X7A726;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialVideoClub/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

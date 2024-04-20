@@ -1,5 +1,5 @@
 //
-//  TableViewFeedVC.swift
+//  ClubBaseTableViewVC.swift
 //  SocialVideoClub
 //
 //  Created by Sai Raghu Varma Kallepalli on 17/04/24.
@@ -8,7 +8,17 @@
 import UIKit
 import EasyPeasy
 
-class TableViewFeedVC: UIViewController, UIGestureRecognizerDelegate {
+enum Section: Hashable {
+    case post
+    case message
+}
+
+enum Row: Hashable {
+    case post(PostModel)
+    case message(Tokens)
+}
+
+class ClubBaseTableViewVC: UIViewController, UIGestureRecognizerDelegate {
     
     var autoPlayTimerOnViewAppear: Timer?
     var posts: [PostModel] = []
@@ -31,13 +41,15 @@ class TableViewFeedVC: UIViewController, UIGestureRecognizerDelegate {
     @objc lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: tableViewStyle)
         tv.delegate = self
-        tv.dataSource = self
         tv.refreshControl = refreshControl
         tv.backgroundColor = .clear
         tv.contentInset = .init(top: 0, left: 0, bottom: 100, right: 0)
         tv.separatorStyle = .none
         return tv
     }()
+    
+    lazy var dataSource = ClubTableViewDataSource(tableView: tableView, cellDelegate: self)
+    
     
     deinit {
         removeScrollObserver()
@@ -140,28 +152,27 @@ class TableViewFeedVC: UIViewController, UIGestureRecognizerDelegate {
             VideoAutoPlayManager.handle(cv: tableView)
         }
     }
-    
-    func showNoData() {
-        tableView.isHidden = true
-    }
 }
 
-extension TableViewFeedVC: UITableViewDelegate {
+extension ClubBaseTableViewVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.width * 16/10
+        if let item = dataSource.itemIdentifier(for: indexPath) {
+            switch item {
+                case .post:
+                    return view.frame.width * 16/10
+                    
+                case .message(let token):
+                    switch token {
+                        case .isLoading:
+                            return LoadingCell.height
+                            
+                        default:
+                            return MessageCell.height
+                            
+                    }
+            }
+        }
+        
+        return UITableView.automaticDimension
     }
 }
-
-extension TableViewFeedVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        assertionFailure("Needs implementation")
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        assertionFailure("Needs implementation")
-        return UITableViewCell()
-    }
-}
-
-

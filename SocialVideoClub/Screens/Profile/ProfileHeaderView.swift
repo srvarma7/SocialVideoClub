@@ -33,11 +33,11 @@ class ProfileHeaderView: UIView {
         profileImageView.easy.layout(
             Top(5),
             CenterX(),
-            Size(170)
+            Size(150)
         )
         
         addSubview(name)
-        name.easy.layout(Top(8).to(profileImageView), CenterX())
+        name.easy.layout(Top(5).to(profileImageView), CenterX())
     }
     
     required init?(coder: NSCoder) {

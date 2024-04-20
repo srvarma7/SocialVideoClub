@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct PostModel: Decodable {
+struct PostModel: Decodable, Hashable, Identifiable, Equatable {
+    var id: String {
+        return postId
+    }
+    
     var likes: Int
     let postId: String
     let profile_image: String?

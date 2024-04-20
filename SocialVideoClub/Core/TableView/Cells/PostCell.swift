@@ -9,7 +9,7 @@ import UIKit
 import EasyPeasy
 import SDWebImage
 
-enum ScreenLocation {
+@objc enum ScreenLocation: Int {
     case feed
     case post
     case profile
@@ -17,6 +17,7 @@ enum ScreenLocation {
 
 protocol VideoCellDelegate: AnyObject {
     func showProfile(name: String)
+    func cellDisplayLocation() -> ScreenLocation
 }
 
 final class PostCell: UITableViewCell {
@@ -256,13 +257,13 @@ extension PostCell {
 }
 
 extension PostCell {
-    func bind(_ post: PostModel, location: ScreenLocation) {
+    func bind(_ post: PostModel) {
         self.post = post
         
         userImage.isHidden = true
         likeButton.isHidden = true
         
-        if location == .post {
+        if delegate?.cellDisplayLocation() == .post {
             likeButton.isHidden = false
             if let profileImage = post.profile_image, let userImageURL = URL(string: profileImage) {
                 userImage.setImage(with: userImageURL)

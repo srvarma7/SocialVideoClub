@@ -11,12 +11,24 @@ protocol ProfileViewModelDelegate: AnyObject {
     func didFetchProfile()
 }
 
-class ProfileViewModel {
+class ProfileViewModel: TableBindableViewModel {
+    weak var dataSource: ClubTableViewDataSource?
+    
     weak var delegate: ProfileViewModelDelegate?
     
     let service: ProfileServiceManageable
     
     var profile: ProfileModel?
+    
+    var objects: [Any] = []
+    
+    
+    // MARK: - Flags
+    
+    
+    private (set) var isRefreshing: Bool = false
+    private (set) var isFetching: Bool = false
+    private var networkError = false
     
     private (set) var profileName: String
     
@@ -26,44 +38,89 @@ class ProfileViewModel {
         self.service = service
     }
     
+    func refresh() {
+        isRefreshing = true
+        fetchProfile()
+    }
+    
     func fetchProfile() {
+        guard isFetching == false else {
+            return
+        }
+        
+        isFetching = true
+        updateObject()
+        
         DispatchQueue.global().async { [weak self] in
             guard let self else {
                 return
             }
             
             self.service.fetchProfile(name: profileName) { result in
+                
+                self.isRefreshing = false
+                self.isFetching = false
+                self.networkError = false
+                
                 switch result {
                     case .success(let profileResult):
                         self.profile = profileResult
                         self.delegate?.didFetchProfile()
                     case .failure(let failure):
                         print(failure)
+                        self.networkError = true
                 }
+                
+                self.updateObject()
             }
         }
     }
     
-//    /// Using async/await
-//    func fetchProfile() {
-//        DispatchQueue.global().async {
-//            Task { [weak self] in
-//                guard let self else {
-//                    return
-//                }
-//                
-//                let result = await self.service.fetchProfile(name: profileName)
-//                switch result {
-//                    case .success(let profileResult):
-//                        self.profile = profileResult
-//                        DispatchQueue.main.async {
-//                            self.delegate?.didFetchProfile()
-//                        }
-//                    case .failure(let failure):
-//                        print(failure)
-//                }
-//            }
-//        }
-//    }
+    func updateObject(animated: Bool = true) {
+        var newObjects: [Any] = []
+        
+        if isRefreshing {
+            newObjects.append(Tokens.isLoading)
+        }
+        
+        if let profile {
+            newObjects.append(contentsOf: profile.posts)
+        }
+        
+        if isFetching, !isRefreshing {
+            newObjects.append(Tokens.isLoading)
+        }
+        
+        if networkError {
+            newObjects.append(Tokens.networkError)
+        }
+        
+        self.objects = newObjects
+        
+        dataSource?.update(objects: objects)
+    }
 }
 
+extension ProfileViewModel {
+    //    /// Using async/await
+    //    func fetchProfile() {
+    //        DispatchQueue.global().async {
+    //            Task { [weak self] in
+    //                guard let self else {
+    //                    return
+    //                }
+    //
+    //                let result = await self.service.fetchProfile(name: profileName)
+    //                switch result {
+    //                    case .success(let profileResult):
+    //                        self.profile = profileResult
+    //                        DispatchQueue.main.async {
+    //                            self.delegate?.didFetchProfile()
+    //                        }
+    //                    case .failure(let failure):
+    //                        print(failure)
+    //                }
+    //            }
+    //        }
+    //    }
+}
