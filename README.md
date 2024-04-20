@@ -4,6 +4,11 @@
 | ------------------- | ------------------ | --------------------- |
 | ![](Demo/home.PNG)  | ![](Demo/post.PNG) | ![](Demo/profile.PNG) |
 
+
+
+https://github.com/srvarma7/SocialVideoClub/assets/48859937/ee82a50c-09fd-48c4-9362-92c7bb33091d
+
+
  
 ## UI inspiration from Instagram
     - As it is heavy in video content
