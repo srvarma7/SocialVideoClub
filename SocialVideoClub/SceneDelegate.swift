@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    /// Coordinator to handle navigation
     var coordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,6 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinator?.start()
         
         window = UIWindow(windowScene: windowScene)
+        // Forced the app to use dark mode.
+        // However, can set to system and make the app support both light/dark using Color Set under the Assets.
         window?.overrideUserInterfaceStyle = .dark
         window?.rootViewController = navController
         window?.makeKeyAndVisible()

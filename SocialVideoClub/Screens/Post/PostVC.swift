@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostVC: TableViewFeedVC {
+class PostVC: ClubBaseTableViewVC {
     
     weak var coordinator: MainCoordinator?
     
@@ -20,6 +20,8 @@ class PostVC: TableViewFeedVC {
     init(viewModel: PostViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        viewModel.delegate = self
+        viewModel.dataSource = dataSource
     }
     
     required init?(coder: NSCoder) {
@@ -31,53 +33,38 @@ class PostVC: TableViewFeedVC {
         
         title = "Post"
         
-        viewModel.delegate = self
         viewModel.fetchPost()
-    }
-    
-    override func registerTableViewCells() {
-        tableView.register(PostCell.self, forCellReuseIdentifier: PostCell.id)
+        viewModel.updateObject()
     }
     
     override func scrollOffsetDidChange(contentOffset: CGPoint) {
         VideoAutoPlayManager.handle(cv: tableView)
     }
+    
+    override func didPullToRefresh() {
+        viewModel.refreshPost()
+    }
+    
+    @objc override func cellDisplayLocation() -> ScreenLocation {
+        return .post
+    }
 }
 
 extension PostVC: PostViewModelDelegate {
     func didFetchPost() {
-        tableView.reloadData()
         refreshControl.endRefreshing()
     }
 }
 
 extension PostVC {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.posts.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let videoCell = tableView.dequeueReusableCell(withIdentifier: PostCell.id, for: indexPath) as? PostCell else {
-            return UITableViewCell()
-        }
-        
-        videoCell.delegate = self
-        let post = viewModel.posts[indexPath.row]
-        videoCell.bind(post, location: .post)
-        
-        return videoCell
-    }
-}
-
-extension PostVC: VideoCellDelegate {
-    func showProfile(name: String) {
+    override func showProfile(name: String) {
         coordinator?.showProfile(name: name)
     }
 }
 
-import SwiftUI
-
-#Preview {
-    let navVC = UINavigationController(rootViewController: HomeFeedVC())
-    return navVC
-}
+//import SwiftUI
+//
+//#Preview {
+//    let navVC = UINavigationController(rootViewController: HomeFeedVC())
+//    return navVC
+//}

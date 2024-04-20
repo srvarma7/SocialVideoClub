@@ -37,24 +37,6 @@ extension VideoAutoPlayManager {
         return cells
     }
     
-//    private static func visiblePercentageInSuperView(of cell: UITableViewCell) -> Int {
-//        guard let cellSuperView = cell.superview else {
-//            return 0
-//        }
-//        
-//        let cellFrame = cell.frame
-//        let rect = cellSuperView.convert(cellFrame, from: cellSuperView)
-//        let intersection = rect.intersection(cellSuperView.bounds)
-//        let ratio = (intersection.width * intersection.height) / (cellFrame.width * cellFrame.height)
-//        
-//        guard !ratio.isNaN else {                                                   // Check if ratio is valid due to frame availability
-//            return 0
-//        }
-//        
-//        let visiblePercentage = Int(ratio * 100)
-//        return visiblePercentage
-//    }
-    
     private static func handleVideoCells(videoCells: [PostCell]) -> Bool {
         if videoCells.count > 1 {
             let cell1 = videoCells[0]

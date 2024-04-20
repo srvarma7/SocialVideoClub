@@ -45,22 +45,23 @@ class ProfileServiceManager: ProfileServiceManageable {
             }
         }
     }
-    
-    //    /// Using async/await
-    //    func fetchProfile(name: String) async -> Result<ProfileModel, Error> {
-    //        let result = await networkProvider.request(.profileViaName(name), callbackQueue: .main)
-    //        switch result {
-    //            case .success(let (data, _)):
-    //                let parsedDataResult = responseHandler.decode(type: ProfileResponseModel.self, data: data)
-    //                switch parsedDataResult {
-    //                    case .success(let response):
-    //                        return .success(response.profile)
-    //                    case .failure(let failure):
-    //                        return .failure(failure)
-    //                }
-    //            case .failure(let failure):
-    //                return .failure(failure)
-    //        }
-    //    }
-
 }
+
+//extension ProfileServiceManager {
+//    /// Using async/await
+//    func fetchProfile(name: String) async -> Result<ProfileModel, Error> {
+//        let result = await networkProvider.request(.profileViaName(name), callbackQueue: .main)
+//        switch result {
+//            case .success(let (data, _)):
+//                let parsedDataResult = responseHandler.decode(type: ProfileResponseModel.self, data: data)
+//                switch parsedDataResult {
+//                    case .success(let response):
+//                        return .success(response.profile)
+//                    case .failure(let failure):
+//                        return .failure(failure)
+//                }
+//            case .failure(let failure):
+//                return .failure(failure)
+//        }
+//    }
+//}

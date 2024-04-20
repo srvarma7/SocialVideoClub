@@ -1,5 +1,9 @@
 # Social Video Club
 
+## UI inspiration from Instagram
+    - As it is heavy in video content
+    - and have a benchmark for standards 
+
 The application has 3 screens
     1. Home feed 
         - A list of video appear on feed.
@@ -67,4 +71,3 @@ The application has 3 screens
 
 # Callout
     - Forced the interface to use dark mode, it provides rich and decent look for a video heavy content app.
-    

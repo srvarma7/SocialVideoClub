@@ -10,7 +10,7 @@ import EasyPeasy
 
 final class MessageCell: UITableViewCell {
     static let height: CGFloat = 100
-    static let id = "MessageCell"
+    static let id = MessageCell.description()
     
     lazy var messageImageView: UIImageView = {
         let iView = UIImageView()

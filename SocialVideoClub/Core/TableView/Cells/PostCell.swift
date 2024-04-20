@@ -9,14 +9,16 @@ import UIKit
 import EasyPeasy
 import SDWebImage
 
-enum ScreenLocation {
+// Used to configure UI based on the location
+@objc enum ScreenLocation: Int {
     case feed
-    case post
+    case post               // Enables like button and profile image in the Post
     case profile
 }
 
 protocol VideoCellDelegate: AnyObject {
-    func showProfile(name: String)
+    func showProfile(name: String)                  // Call for navigating to Profile by name
+    func cellDisplayLocation() -> ScreenLocation
 }
 
 final class PostCell: UITableViewCell {
@@ -99,12 +101,15 @@ final class PostCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // Resetting cell to avoid using unrelated content
     override func prepareForReuse() {
         super.prepareForReuse()
         playerInitializeTimer?.invalidate()
         playerInitializeTimer = nil
         userImage.isHidden = true
         thumbnailImage.isHidden = false
+        videoPlayer.removePlayerObserver()
         videoPlayer.player?.replaceCurrentItem(with: nil)
     }
 }
@@ -182,7 +187,7 @@ extension PostCell: VideoViewDelegate {
     }
     
     private func triggerAutoPlay() {
-        if let superCV = self.superview as? UITableView {
+        if let superCV = superview as? UITableView {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 VideoAutoPlayManager.handle(cv: superCV)
             }
@@ -201,7 +206,7 @@ extension PostCell {
             Leading(),
             Trailing(),
             Top(),
-            Bottom(5)
+            Bottom()
         )
         
         videoContainer.addSubview(videoPlayer)
@@ -256,13 +261,13 @@ extension PostCell {
 }
 
 extension PostCell {
-    func bind(_ post: PostModel, location: ScreenLocation) {
+    func bind(_ post: PostModel) {
         self.post = post
         
         userImage.isHidden = true
         likeButton.isHidden = true
         
-        if location == .post {
+        if delegate?.cellDisplayLocation() == .post {
             likeButton.isHidden = false
             if let profileImage = post.profile_image, let userImageURL = URL(string: profileImage) {
                 userImage.setImage(with: userImageURL)

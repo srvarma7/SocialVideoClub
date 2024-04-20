@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import EasyPeasy
 import AVKit
 import AVFoundation
 
@@ -42,12 +43,21 @@ class VideoView: UIView {
         }
     }
     
+    lazy var bufferIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         playerLayer.videoGravity = .resizeAspectFill
         playerLayer.needsDisplayOnBoundsChange = true
         playerLayer.masksToBounds = true
         clipsToBounds = true
+        
+        addSubview(bufferIndicator)
+        bufferIndicator.easy.layout(Center(), Size(20))
     }
     
     required init?(coder: NSCoder) {
@@ -58,12 +68,18 @@ class VideoView: UIView {
     
     private var playerItem: AVPlayerItem?
     
+    private var playerItemStatusObserver: NSKeyValueObservation?
+    private var playerItemBufferEmptyObserver: NSKeyValueObservation?
+    private var playerItemBufferKeepUpObserver: NSKeyValueObservation?
+    private var playerItemBufferFullObserver: NSKeyValueObservation?
+    
     func play(with url: URL) {
-        setUpAsset(with: url) { [weak self] (asset: AVAsset) in
+        setUpAsset(with: url) { [weak self] asset in
             self?.setUpPlayerItem(with: asset)
         }
     }
     
+    /// Load asset async
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
         let asset = AVAsset(url: url)
         
@@ -73,7 +89,7 @@ class VideoView: UIView {
                 if isPlayable {
                     completion?(asset)
                 } else {
-                    print("failed")
+                    print("Cannot play video")
                 }
             } catch(let error) {
                 print(error.localizedDescription)
@@ -87,7 +103,7 @@ class VideoView: UIView {
             self?.playerItem = AVPlayerItem(asset: asset)
             self?.addPlayerObserver()
             
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 if self?.player == nil {
                     self?.player = AVPlayer(playerItem: self?.playerItem!)
                 } else {
@@ -97,33 +113,51 @@ class VideoView: UIView {
         }
     }
     
-    private func removePlayerObserver() {
-        playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
+    func removePlayerObserver() {
+        playerItemStatusObserver?.invalidate()
+        playerItemStatusObserver = nil
+        
+        playerItemBufferEmptyObserver?.invalidate()
+        playerItemBufferEmptyObserver = nil
+        
+        playerItemBufferKeepUpObserver?.invalidate()
+        playerItemBufferKeepUpObserver = nil
+        
+        playerItemBufferFullObserver?.invalidate()
+        playerItemBufferFullObserver = nil
+        
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.removeObserver(self, name: pauseAllPlayback, object: nil)
     }
     
     private func addPlayerObserver() {
-        playerItem?.addObserver(
-            self,
-            forKeyPath: #keyPath(AVPlayerItem.status),
-            options: [.old, .new],
-            context: &playerItemContext
-        )
+        // Notify auto play that the asset is ready
+        playerItemStatusObserver = playerItem?.observe(\AVPlayerItem.status, options: .new) { [weak self] _, change in
+            guard let self, playerItem?.status == .readyToPlay else { return }
+            delegate?.playerReadyToPlay()
+        }
+        
+        // Activity indicator
+        playerItemBufferEmptyObserver = playerItem?.observe(\AVPlayerItem.isPlaybackBufferEmpty, options: [.new]) { [weak self] (_, change) in
+            guard let self else { return }
+            bufferIndicator.startAnimating()
+        }
+        
+        playerItemBufferKeepUpObserver = playerItem?.observe(\AVPlayerItem.isPlaybackLikelyToKeepUp, options: [.new]) { [weak self] (_, change) in
+            guard let self = self else { return }
+            bufferIndicator.stopAnimating()
+        }
+        
+        playerItemBufferFullObserver = playerItem?.observe(\AVPlayerItem.isPlaybackBufferFull, options: [.new]) { [weak self] (_, change) in
+            guard let self = self else { return }
+            bufferIndicator.stopAnimating()
+        }
+        
         // did play to end
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didPlayToEnd),
-            name: .AVPlayerItemDidPlayToEndTime,
-            object: nil
-        )
+        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEnd), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        
         // general pause on PauseAllPlayback
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(pauseAllPlaybackNotification),
-            name: pauseAllPlayback,
-            object: nil
-        )
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseAllPlaybackNotification), name: pauseAllPlayback, object: nil)
     }
     
     @objc func pauseAllPlaybackNotification() {
@@ -133,35 +167,6 @@ class VideoView: UIView {
     @objc func didPlayToEnd() {
         player?.seek(to: .zero)
         delegate?.playerDidPlayToEnd()
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &playerItemContext else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            return
-        }
-        
-        if keyPath == #keyPath(AVPlayerItem.status) {
-            
-            let status: AVPlayerItem.Status
-            if let statusNumber = change?[.newKey] as? NSNumber {
-                status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
-            } else {
-                status = .unknown
-            }
-            
-            switch status {
-                case .readyToPlay:
-                    print(".readyToPlay")
-                    delegate?.playerReadyToPlay()
-                case .failed:
-                    print(".failed")
-                case .unknown:
-                    print(".unknown")
-                @unknown default:
-                    print("@unknown default")
-            }
-        }
     }
 }
 

@@ -10,7 +10,7 @@ import EasyPeasy
 
 final class LoadingCell: UITableViewCell {
     static let height: CGFloat = 100
-    static let id = "LoadingCell"
+    static let id = LoadingCell.description()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let aiView = UIActivityIndicatorView()

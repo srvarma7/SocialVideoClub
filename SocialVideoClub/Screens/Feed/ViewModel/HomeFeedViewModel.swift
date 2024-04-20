@@ -5,7 +5,7 @@
 //  Created by Sai Raghu Varma Kallepalli on 17/04/24.
 //
 
-import Foundation
+import UIKit
 
 import OSLog
 private let logger = Logger(subsystem: "com.SocialVideoClub", category: "HomeFeedViewModel")
@@ -15,19 +15,30 @@ protocol HomeFeedDelegate: AnyObject {
     func didFetchFeedFailed()
 }
 
-class HomeFeedViewModel {
+protocol TableBindableViewModel {
+    var dataSource: ClubTableViewDataSource? { get }
+    func updateObject(animated: Bool)
+}
+
+class HomeFeedViewModel: TableBindableViewModel {
+    
+    weak var dataSource: ClubTableViewDataSource?
     weak var delegate: HomeFeedDelegate?
     
-    let feedService: FeedServiceManageable
-    
     var objects: [Any] = []
-    private var hasMoreFeed = true
-    private var networkError = false
+    private (set) var _posts: [PostModel] = []
     
-    
-    private var _posts: [PostModel] = []
     private var pageCount = 0
+    
+    
+    // MARK: - Flags
+    
+    
     private (set) var isFetching: Bool = false
+    private var hasMoreFeed = true
+    private var isNetworkConnectionError = false
+    
+    let feedService: FeedServiceManageable
     
     init(feedService: FeedServiceManageable = FeedServiceManager()) {
         self.feedService = feedService
@@ -39,21 +50,22 @@ class HomeFeedViewModel {
         fetchPosts()
     }
     
+    /// Fetch posts and paginate calls
     func fetchPosts() {
-        guard isFetching == false && hasMoreFeed else {
+        guard isFetching == false && hasMoreFeed else {                            // Avoid duplicate requests while one is active.
             return
         }
         
         isFetching = true
-        updateObjects()
+        updateObject()
         DispatchQueue.global().async { [weak self] in
             guard let self else {
                 return
             }
             
-            self.feedService.fetchNextFeed(page: pageCount) { result in
+            self.feedService.fetchFeed(page: pageCount) { result in
                 self.isFetching = false
-                self.networkError = false
+                self.isNetworkConnectionError = false
                 switch result {
                     case .success(let newPosts):
                         if self.pageCount == 0 {
@@ -69,20 +81,20 @@ class HomeFeedViewModel {
                             self.pageCount += 1
                         }
                         
-                        self.updateObjects()
                         self.delegate?.didFetchFeed()
                     case .failure(let failure):
-                        logger.error("\(failure.localizedDescription)")
-                        self.networkError = true
-                        self.updateObjects()
+                        let error = failure as NSError
+                        self.isNetworkConnectionError = error.code == -1009
+                        logger.error("\(error.localizedDescription)")
                         self.delegate?.didFetchFeedFailed()
                 }
                 
+                self.updateObject()
             }
         }
     }
     
-    func updateObjects() {
+    func updateObject(animated: Bool = true) {
         var newObjects: [Any] = []
         
         if !_posts.isEmpty {
@@ -90,35 +102,39 @@ class HomeFeedViewModel {
         }
         
         if isFetching {
-            newObjects.append(Tokens.isLoading)
+            newObjects.append(FeedToken.isLoading)
         }
         
         if hasMoreFeed == false {
-            newObjects.append(Tokens.hasNoMoreFeed)
+            newObjects.append(FeedToken.hasNoMoreFeed)
         }
         
-        if networkError {
-            newObjects.append(Tokens.networkError)
+        if isNetworkConnectionError {
+            newObjects.append(FeedToken.networkError)
         }
         
         self.objects = newObjects
+        
+        dataSource?.update(objects: objects)
     }
-    
+}
+
+//extension HomeFeedViewModel {
 //    /// Using async/await
 //    func fetchPosts() {
 //        guard isFetching == false else {
 //            return
 //        }
-//        
+//
 //        isFetching = true
-//        
+//
 //        DispatchQueue.global().async {
 //            Task { [weak self] in
 //                guard let self else {
 //                    return
 //                }
-//                
-//                let result = await self.feedService.fetchNextFeed(page: pageCount)
+//
+//                let result = await self.feedService.fetchFeed(page: pageCount)
 //                switch result {
 //                    case .success(let newPosts):
 //                        if pageCount == 0 {
@@ -135,10 +151,10 @@ class HomeFeedViewModel {
 //                        DispatchQueue.main.async {
 //                            self.delegate?.didFetchFeedFailed()
 //                        }
-//                        
+//
 //                }
 //                isFetching = false
 //            }
 //        }
 //    }
-}
+//}

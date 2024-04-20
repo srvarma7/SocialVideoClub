@@ -8,7 +8,7 @@
 import UIKit
 import EasyPeasy
 
-class ProfileVC: TableViewFeedVC {
+class ProfileVC: ClubBaseTableViewVC {
     
     weak var coordinator: MainCoordinator?
     
@@ -37,11 +37,16 @@ class ProfileVC: TableViewFeedVC {
         super.viewDidLoad()
         
         viewModel.delegate = self
+        viewModel.dataSource = dataSource
         viewModel.fetchProfile()
     }
     
-    override func registerTableViewCells() {
-        tableView.register(PostCell.self, forCellReuseIdentifier: PostCell.id)
+    override func didPullToRefresh() {
+        viewModel.refresh()
+    }
+    
+    @objc override func cellDisplayLocation() -> ScreenLocation {
+        return .profile
     }
     
     var tableHeaderHeight: CGFloat {
@@ -49,46 +54,30 @@ class ProfileVC: TableViewFeedVC {
     }
     
     override func scrollOffsetDidChange(contentOffset: CGPoint) {
-        print(contentOffset.y)
+        super.scrollOffsetDidChange(contentOffset: contentOffset)
+        
         title = contentOffset.y > tableHeaderHeight/1.2 ? viewModel.profileName : ""
-        VideoAutoPlayManager.handle(cv: tableView)
     }
 }
 
 extension ProfileVC: ProfileViewModelDelegate {
-    func didFetchProfile() {
-        tableView.reloadData()
+    func didFetchProfile(_ profile: ProfileModel) {
         refreshControl.endRefreshing()
         
-        if let profile = viewModel.profile {
-            profileHeader.name.text = profile.username
-            if let url = URL(string: profile.profilePictureUrl) {
-                profileHeader.profileImageView.setImage(with: url)
-            }
+        profileHeader.name.text = profile.username
+        if let url = URL(string: profile.profilePictureUrl) {
+            profileHeader.profileImageView.setImage(with: url)
         }
+    }
+    
+    func profileFetchError() {
+        refreshControl.endRefreshing()
     }
 }
 
 extension ProfileVC {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.profile?.posts.count ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let videoCell = tableView.dequeueReusableCell(withIdentifier: PostCell.id, for: indexPath) as? PostCell else {
-            
-            return UITableViewCell()
-        }
-        
-        if let post = viewModel.profile?.posts[indexPath.row] {
-            videoCell.bind(post, location: .profile)
-        }
-        
-        return videoCell
-    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return profileHeader
+        return section == 0 ? profileHeader : nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -96,15 +85,31 @@ extension ProfileVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let post = viewModel.profile?.posts[indexPath.row] {
-            coordinator?.showPost(post: post)
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        if let cell = tableView.cellForRow(at: indexPath) {
+            let visibility = cell.visiblePercentageInSuperView()
+            if visibility < 90 {
+                tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+            } else {
+                if let item = dataSource.itemIdentifier(for: indexPath) {
+                    switch item {
+                        case .post(let post):
+                            coordinator?.showPost(post: post)
+                            return
+                            
+                        default:
+                            return
+                    }
+                }
+            }
         }
     }
 }
 
-import SwiftUI
-
-#Preview {
-    let navVC = UINavigationController(rootViewController: ProfileVC(viewModel: ProfileViewModel(name: "sai")))
-    return navVC
-}
+//import SwiftUI
+//
+//#Preview {
+//    let navVC = UINavigationController(rootViewController: ProfileVC(viewModel: ProfileViewModel(name: "sai")))
+//    return navVC
+//}
