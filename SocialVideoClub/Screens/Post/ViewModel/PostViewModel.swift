@@ -12,6 +12,7 @@ private let logger = Logger(subsystem: "com.SocialClub", category: "PostViewMode
 
 protocol PostViewModelDelegate: AnyObject {
     func didFetchPost()
+    func didFetchPostFailed(_ error: Error)
 }
 
 class PostViewModel: TableBindableViewModel {
@@ -87,6 +88,7 @@ class PostViewModel: TableBindableViewModel {
                         let error = failure as NSError
                         self.isNetworkConnectionError = error.code == -1009
                         logger.error("\(error.localizedDescription)")
+                        self.delegate?.didFetchPostFailed(error)
                 }
                 
                 self.updateObject(animated: false)
@@ -111,6 +113,10 @@ class PostViewModel: TableBindableViewModel {
         
         if isNetworkConnectionError {
             newObjects.append(FeedToken.networkError)
+        }
+        
+        if newObjects.isEmpty {
+            newObjects.append(FeedToken.noPosts)
         }
         
         self.objects = newObjects
