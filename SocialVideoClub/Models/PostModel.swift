@@ -7,19 +7,11 @@
 
 import Foundation
 
-struct FeedResponse: Decodable {
-    let posts: [PostModel]
-    
-    enum CodingKeys: String, CodingKey {
-        case posts = "data"
-    }
-}
-
 struct PostModel: Decodable {
-    let likes: Int
+    var likes: Int
     let postId: String
-    let profile_image: String
+    let profile_image: String?
     let thumbnail_url: String
-    let username: String
+    let username: String?
     let videoUrl: String
 }

@@ -39,7 +39,7 @@ enum ServiceMethod {
 
 
 enum ServiceError: Error {
-    case invalidURL
+    case invalidURL, noResponse
 }
 
 
@@ -65,7 +65,7 @@ extension ProviderServiceType {
         if let url = URL(string: baseURL + "/" + (path ?? "")) {
             return url
         } else {
-            throw NSError(domain: "Invalid URL", code: 0)
+            throw ServiceError.invalidURL
         }
     }
 }
@@ -76,7 +76,9 @@ extension ProviderServiceType {
 
 protocol ProviderType: AnyObject {
     associatedtype Provider: ProviderServiceType
-    func request(_ service: Provider, callbackQueue: DispatchQueue?) async -> Result<(Data, URLResponse), Error>
+    
+    func request(_ service: Provider, callbackQueue: DispatchQueue?, completion: @escaping (Result<(Data, URLResponse), Error>) -> Void)
+//    func request(_ service: Provider, callbackQueue: DispatchQueue?) async -> Result<(Data, URLResponse), Error>
 }
 
 class NetworkProvider<Target: ProviderServiceType>: ProviderType {
@@ -87,7 +89,8 @@ class NetworkProvider<Target: ProviderServiceType>: ProviderType {
         self.urlSession = session
     }
     
-    func request(_ service: Target, callbackQueue: DispatchQueue?) async -> Result<(Data, URLResponse), Error> {
+    /// Request using completion handler
+    func request(_ service: Target, callbackQueue: DispatchQueue?, completion: @escaping (Result<(Data, URLResponse), Error>) -> Void) {
         var request: URLRequest!
         
         do {
@@ -96,14 +99,44 @@ class NetworkProvider<Target: ProviderServiceType>: ProviderType {
             request.httpMethod = service.method.httpMethod
             request.allHTTPHeaderFields = service.headers
         } catch (let error) {
-            return .failure(error)
+            completion(.failure(error))
         }
         
-        do {
-            let result = try await urlSession.data(for: request)
-            return .success(result)
-        } catch (let error) {
-            return .failure(error)
-        }
+        urlSession.dataTask(with: request) { data, urlResponse, error in
+            (callbackQueue ?? .main).async {
+                if let error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                if let data, let urlResponse {
+                    completion(.success((data, urlResponse)))
+                } else {
+                    completion(.failure(ServiceError.noResponse))
+                }
+            }
+            
+        }.resume()
     }
+    
+    /// Request using async/await
+    //    func request(_ service: Target, callbackQueue: DispatchQueue?) async -> Result<(Data, URLResponse), Error> {
+    //        var request: URLRequest!
+    //
+    //        do {
+    //            let url = try service.fullURL()
+    //            request = URLRequest(url: url)
+    //            request.httpMethod = service.method.httpMethod
+    //            request.allHTTPHeaderFields = service.headers
+    //        } catch (let error) {
+    //            return .failure(error)
+    //        }
+    //
+    //        do {
+    //            let result = try await urlSession.data(for: request)
+    //            return .success(result)
+    //        } catch (let error) {
+    //            return .failure(error)
+    //        }
+    //    }
 }
