@@ -7,19 +7,22 @@
 
 import Foundation
 
+import OSLog
+private let logger = Logger(subsystem: "com.SocialClub", category: "ProfileViewModel")
+
 protocol ProfileViewModelDelegate: AnyObject {
-    func didFetchProfile()
+    func didFetchProfile(_ profile: ProfileModel)
+    func profileFetchError()
 }
 
 class ProfileViewModel: TableBindableViewModel {
-    weak var dataSource: ClubTableViewDataSource?
     
+    weak var dataSource: ClubTableViewDataSource?
     weak var delegate: ProfileViewModelDelegate?
     
     let service: ProfileServiceManageable
     
     var profile: ProfileModel?
-    
     var objects: [Any] = []
     
     
@@ -28,7 +31,7 @@ class ProfileViewModel: TableBindableViewModel {
     
     private (set) var isRefreshing: Bool = false
     private (set) var isFetching: Bool = false
-    private var networkError = false
+    private var isNetworkConnectionError = false
     
     private (set) var profileName: String
     
@@ -60,15 +63,17 @@ class ProfileViewModel: TableBindableViewModel {
                 
                 self.isRefreshing = false
                 self.isFetching = false
-                self.networkError = false
+                self.isNetworkConnectionError = false
                 
                 switch result {
                     case .success(let profileResult):
                         self.profile = profileResult
-                        self.delegate?.didFetchProfile()
+                        self.delegate?.didFetchProfile(profileResult)
                     case .failure(let failure):
-                        print(failure)
-                        self.networkError = true
+                        let error = failure as NSError
+                        self.isNetworkConnectionError = error.code == -1009
+                        logger.error("\(error.localizedDescription)")
+                        self.delegate?.profileFetchError()
                 }
                 
                 self.updateObject()
@@ -80,7 +85,7 @@ class ProfileViewModel: TableBindableViewModel {
         var newObjects: [Any] = []
         
         if isRefreshing {
-            newObjects.append(Tokens.isLoading)
+            newObjects.append(FeedToken.isLoading)
         }
         
         if let profile {
@@ -88,11 +93,11 @@ class ProfileViewModel: TableBindableViewModel {
         }
         
         if isFetching, !isRefreshing {
-            newObjects.append(Tokens.isLoading)
+            newObjects.append(FeedToken.isLoading)
         }
         
-        if networkError {
-            newObjects.append(Tokens.networkError)
+        if isNetworkConnectionError {
+            newObjects.append(FeedToken.networkError)
         }
         
         self.objects = newObjects

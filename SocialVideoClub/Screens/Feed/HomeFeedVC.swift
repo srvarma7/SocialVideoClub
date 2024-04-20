@@ -19,7 +19,6 @@ class HomeFeedVC: ClubBaseTableViewVC {
         
         title = "Social Club"
         
-//        refreshControl.beginRefreshing()
         viewModel.delegate = self
         viewModel.dataSource = dataSource
         viewModel.fetchPosts()
@@ -31,8 +30,9 @@ class HomeFeedVC: ClubBaseTableViewVC {
     
     override func scrollOffsetDidChange(contentOffset: CGPoint) {
         super.scrollOffsetDidChange(contentOffset: contentOffset)
-        let scrollPercentage = ((contentOffset.y + 80) / tableView.contentSize.height) * 100
+        let scrollPercentage = ((contentOffset.y + tableView.contentInset.bottom) / tableView.contentSize.height) * 100
         
+        // Fetch new next feed on consuming 85 percent of current feed.
         if scrollPercentage > 85 {
             viewModel.fetchPosts()
         }

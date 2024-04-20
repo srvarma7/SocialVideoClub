@@ -44,22 +44,24 @@ class PostServiceManager: PostServiceManageable {
                     completion(.failure(failure))
             }
         }
-    }
-    
-    //    /// Using async/await
-    //    func fetchPost(id: String) async -> Result<PostModel, Error> {
-    //        let result = await networkProvider.request(.post(id), callbackQueue: .main)
-    //        switch result {
-    //            case .success(let (data, _)):
-    //                let parsedDataResult = responseHandler.decode(type: PostResponseModel.self, data: data)
-    //                switch parsedDataResult {
-    //                    case .success(let response):
-    //                        return .success(response.post)
-    //                    case .failure(let failure):
-    //                        return .failure(failure)
-    //                }
-    //            case .failure(let failure):
-    //                return .failure(failure)
-    //        }
-    //    }
+    }   
 }
+
+//extension PostServiceManager {
+//    /// Using async/await
+//    func fetchPost(id: String) async -> Result<PostModel, Error> {
+//        let result = await networkProvider.request(.post(id), callbackQueue: .main)
+//        switch result {
+//            case .success(let (data, _)):
+//                let parsedDataResult = responseHandler.decode(type: PostResponseModel.self, data: data)
+//                switch parsedDataResult {
+//                    case .success(let response):
+//                        return .success(response.post)
+//                    case .failure(let failure):
+//                        return .failure(failure)
+//                }
+//            case .failure(let failure):
+//                return .failure(failure)
+//        }
+//    }
+//}

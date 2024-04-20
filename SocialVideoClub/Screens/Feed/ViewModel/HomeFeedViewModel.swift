@@ -20,26 +20,28 @@ protocol TableBindableViewModel {
     func updateObject(animated: Bool)
 }
 
-
-
 class HomeFeedViewModel: TableBindableViewModel {
-    weak var dataSource: ClubTableViewDataSource?
     
+    weak var dataSource: ClubTableViewDataSource?
     weak var delegate: HomeFeedDelegate?
-    let feedService: FeedServiceManageable
     
     var objects: [Any] = []
-    private var hasMoreFeed = true
-    private var networkError = false
-    
-    
     private (set) var _posts: [PostModel] = []
+    
     private var pageCount = 0
+    
+    
+    // MARK: - Flags
+    
+    
     private (set) var isFetching: Bool = false
+    private var hasMoreFeed = true
+    private var isNetworkConnectionError = false
+    
+    let feedService: FeedServiceManageable
     
     init(feedService: FeedServiceManageable = FeedServiceManager()) {
         self.feedService = feedService
-        
     }
     
     func fetchLatestFeed() {
@@ -50,7 +52,7 @@ class HomeFeedViewModel: TableBindableViewModel {
     
     /// Fetch posts and paginate calls
     func fetchPosts() {
-        guard isFetching == false && hasMoreFeed else {
+        guard isFetching == false && hasMoreFeed else {                            // Avoid duplicate requests while one is active.
             return
         }
         
@@ -61,9 +63,9 @@ class HomeFeedViewModel: TableBindableViewModel {
                 return
             }
             
-            self.feedService.fetchNextFeed(page: pageCount) { result in
+            self.feedService.fetchFeed(page: pageCount) { result in
                 self.isFetching = false
-                self.networkError = false
+                self.isNetworkConnectionError = false
                 switch result {
                     case .success(let newPosts):
                         if self.pageCount == 0 {
@@ -79,15 +81,15 @@ class HomeFeedViewModel: TableBindableViewModel {
                             self.pageCount += 1
                         }
                         
-                        self.updateObject()
                         self.delegate?.didFetchFeed()
                     case .failure(let failure):
-                        logger.error("\(failure.localizedDescription)")
-                        self.networkError = true
-                        self.updateObject()
+                        let error = failure as NSError
+                        self.isNetworkConnectionError = error.code == -1009
+                        logger.error("\(error.localizedDescription)")
                         self.delegate?.didFetchFeedFailed()
                 }
                 
+                self.updateObject()
             }
         }
     }
@@ -100,15 +102,15 @@ class HomeFeedViewModel: TableBindableViewModel {
         }
         
         if isFetching {
-            newObjects.append(Tokens.isLoading)
+            newObjects.append(FeedToken.isLoading)
         }
         
         if hasMoreFeed == false {
-            newObjects.append(Tokens.hasNoMoreFeed)
+            newObjects.append(FeedToken.hasNoMoreFeed)
         }
         
-        if networkError {
-            newObjects.append(Tokens.networkError)
+        if isNetworkConnectionError {
+            newObjects.append(FeedToken.networkError)
         }
         
         self.objects = newObjects
@@ -117,42 +119,42 @@ class HomeFeedViewModel: TableBindableViewModel {
     }
 }
 
-extension HomeFeedViewModel {
-    //    /// Using async/await
-    //    func fetchPosts() {
-    //        guard isFetching == false else {
-    //            return
-    //        }
-    //
-    //        isFetching = true
-    //
-    //        DispatchQueue.global().async {
-    //            Task { [weak self] in
-    //                guard let self else {
-    //                    return
-    //                }
-    //
-    //                let result = await self.feedService.fetchNextFeed(page: pageCount)
-    //                switch result {
-    //                    case .success(let newPosts):
-    //                        if pageCount == 0 {
-    //                            self.posts = newPosts
-    //                        } else {
-    //                            self.posts.append(contentsOf: newPosts)
-    //                        }
-    //                        pageCount += 1
-    //                        DispatchQueue.main.async {
-    //                            self.delegate?.didFetchFeed()
-    //                        }
-    //                    case .failure(let failure):
-    //                        print(failure)
-    //                        DispatchQueue.main.async {
-    //                            self.delegate?.didFetchFeedFailed()
-    //                        }
-    //
-    //                }
-    //                isFetching = false
-    //            }
-    //        }
-    //    }
-}
+//extension HomeFeedViewModel {
+//    /// Using async/await
+//    func fetchPosts() {
+//        guard isFetching == false else {
+//            return
+//        }
+//
+//        isFetching = true
+//
+//        DispatchQueue.global().async {
+//            Task { [weak self] in
+//                guard let self else {
+//                    return
+//                }
+//
+//                let result = await self.feedService.fetchFeed(page: pageCount)
+//                switch result {
+//                    case .success(let newPosts):
+//                        if pageCount == 0 {
+//                            self.posts = newPosts
+//                        } else {
+//                            self.posts.append(contentsOf: newPosts)
+//                        }
+//                        pageCount += 1
+//                        DispatchQueue.main.async {
+//                            self.delegate?.didFetchFeed()
+//                        }
+//                    case .failure(let failure):
+//                        print(failure)
+//                        DispatchQueue.main.async {
+//                            self.delegate?.didFetchFeedFailed()
+//                        }
+//
+//                }
+//                isFetching = false
+//            }
+//        }
+//    }
+//}

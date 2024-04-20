@@ -8,21 +8,10 @@
 import UIKit
 import EasyPeasy
 
-enum Section: Hashable {
-    case post
-    case message
-}
-
-enum Row: Hashable {
-    case post(PostModel)
-    case message(Tokens)
-}
-
 class ClubBaseTableViewVC: UIViewController, UIGestureRecognizerDelegate {
     
+    // Autoplay variables
     var autoPlayTimerOnViewAppear: Timer?
-    var posts: [PostModel] = []
-    
     private var _isScrollObserverAdded = false
     var shouldAddScrollObserver: Bool {
         return true
@@ -48,8 +37,9 @@ class ClubBaseTableViewVC: UIViewController, UIGestureRecognizerDelegate {
         return tv
     }()
     
+    /// Responsible to dequeuing and providing cell to TableView
+    /// And apply snapshot changes
     lazy var dataSource = ClubTableViewDataSource(tableView: tableView, cellDelegate: self)
-    
     
     deinit {
         removeScrollObserver()
@@ -66,6 +56,7 @@ class ClubBaseTableViewVC: UIViewController, UIGestureRecognizerDelegate {
         
         registerTableViewCells()
         
+        // Enables pop gesture from the device edge
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -137,6 +128,8 @@ class ClubBaseTableViewVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    // Observe scroll change to handle video auto play
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(tableView.contentOffset) {
             scrollOffsetDidChange(contentOffset: tableView.contentOffset)
@@ -159,9 +152,10 @@ extension ClubBaseTableViewVC: UITableViewDelegate {
         if let item = dataSource.itemIdentifier(for: indexPath) {
             switch item {
                 case .post:
-                    return view.frame.width * 16/10
+                    return view.frame.width * 16/10                 // Ratio to fit the video content well
                     
-                case .message(let token):
+                    
+                case .message(let token):                           // Fixed height. Can be adjusted by calculation the size of content. Ex. text height, image aspect ratio, etc.
                     switch token {
                         case .isLoading:
                             return LoadingCell.height

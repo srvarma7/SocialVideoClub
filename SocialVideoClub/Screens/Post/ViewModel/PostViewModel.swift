@@ -98,7 +98,7 @@ class PostViewModel: TableBindableViewModel {
         var newObjects: [Any] = []
 
         if isRefreshing {
-            newObjects.append(Tokens.isLoading)
+            newObjects.append(FeedToken.isLoading)
         }
         
         if !_posts.isEmpty {
@@ -106,11 +106,11 @@ class PostViewModel: TableBindableViewModel {
         }
         
         if isFetching, !isRefreshing {
-            newObjects.append(Tokens.isLoading)
+            newObjects.append(FeedToken.isLoading)
         }
         
         if isNetworkConnectionError {
-            newObjects.append(Tokens.networkError)
+            newObjects.append(FeedToken.networkError)
         }
         
         self.objects = newObjects

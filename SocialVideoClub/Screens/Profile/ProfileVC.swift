@@ -41,6 +41,14 @@ class ProfileVC: ClubBaseTableViewVC {
         viewModel.fetchProfile()
     }
     
+    override func didPullToRefresh() {
+        viewModel.refresh()
+    }
+    
+    @objc override func cellDisplayLocation() -> ScreenLocation {
+        return .profile
+    }
+    
     var tableHeaderHeight: CGFloat {
         return view.frame.width/2
     }
@@ -50,23 +58,20 @@ class ProfileVC: ClubBaseTableViewVC {
         
         title = contentOffset.y > tableHeaderHeight/1.2 ? viewModel.profileName : ""
     }
-    
-    @objc override func cellDisplayLocation() -> ScreenLocation {
-        return .profile
-    }
 }
 
 extension ProfileVC: ProfileViewModelDelegate {
-    func didFetchProfile() {
-        tableView.reloadData()
+    func didFetchProfile(_ profile: ProfileModel) {
         refreshControl.endRefreshing()
         
-        if let profile = viewModel.profile {
-            profileHeader.name.text = profile.username
-            if let url = URL(string: profile.profilePictureUrl) {
-                profileHeader.profileImageView.setImage(with: url)
-            }
+        profileHeader.name.text = profile.username
+        if let url = URL(string: profile.profilePictureUrl) {
+            profileHeader.profileImageView.setImage(with: url)
         }
+    }
+    
+    func profileFetchError() {
+        refreshControl.endRefreshing()
     }
 }
 

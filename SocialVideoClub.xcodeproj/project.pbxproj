@@ -48,8 +48,7 @@
 		DF5F17102BCE9A61009792B2 /* SocialVideoClubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F170F2BCE9A61009792B2 /* SocialVideoClubTests.swift */; };
 		DF5F171A2BCE9A61009792B2 /* SocialVideoClubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F17192BCE9A61009792B2 /* SocialVideoClubUITests.swift */; };
 		DF5F171C2BCE9A61009792B2 /* SocialVideoClubUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F171B2BCE9A61009792B2 /* SocialVideoClubUITestsLaunchTests.swift */; };
-		DFFD56032BD13C1B00D71BAC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD56022BD13C1B00D71BAC /* ErrorView.swift */; };
-		DFFD560A2BD233A400D71BAC /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD56092BD233A400D71BAC /* Tokens.swift */; };
+		DFFD560A2BD233A400D71BAC /* FeedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD56092BD233A400D71BAC /* FeedToken.swift */; };
 		DFFD560E2BD239EF00D71BAC /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD560D2BD239EF00D71BAC /* LoadingCell.swift */; };
 		DFFD56102BD23FA400D71BAC /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD560F2BD23FA400D71BAC /* MessageCell.swift */; };
 		DFFD56122BD2473A00D71BAC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD56112BD2473A00D71BAC /* UITableView+Extension.swift */; };
@@ -117,8 +116,7 @@
 		DF5F17192BCE9A61009792B2 /* SocialVideoClubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialVideoClubUITests.swift; sourceTree = "<group>"; };
 		DF5F171B2BCE9A61009792B2 /* SocialVideoClubUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialVideoClubUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DFFD56012BD11AF600D71BAC /* SocialClub-Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "SocialClub-Readme.md"; sourceTree = "<group>"; };
-		DFFD56022BD13C1B00D71BAC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		DFFD56092BD233A400D71BAC /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		DFFD56092BD233A400D71BAC /* FeedToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedToken.swift; sourceTree = "<group>"; };
 		DFFD560D2BD239EF00D71BAC /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		DFFD560F2BD23FA400D71BAC /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		DFFD56112BD2473A00D71BAC /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -171,6 +169,7 @@
 		DF0103832BD0FB5F00E3B3A8 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				DF425BA22BCEBC11004799CF /* ProfileService.swift */,
 				DF0103842BD0FB6E00E3B3A8 /* ProfileServiceManager.swift */,
 			);
 			path = Network;
@@ -220,8 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				DF425BAD2BCF8B62004799CF /* SocialClubServiceType.swift */,
-				DF425BAA2BCEE20F004799CF /* PostService.swift */,
-				DF425BA22BCEBC11004799CF /* ProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -229,7 +226,6 @@
 		DF425BB52BCFA334004799CF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				DF425BB82BCFA35D004799CF /* Base */,
 				DF425BB62BCFA33C004799CF /* Feed */,
 				DF425BD72BCFF8ED004799CF /* Post */,
 				DF425BD82BCFF8FA004799CF /* Profile */,
@@ -255,13 +251,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		DF425BB82BCFA35D004799CF /* Base */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		DF425BC02BCFA614004799CF /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				DF425BC92BCFB827004799CF /* GradientView.swift */,
-				DFFD56022BD13C1B00D71BAC /* ErrorView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -331,6 +319,7 @@
 		DF425BDC2BCFFA93004799CF /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				DF425BAA2BCEE20F004799CF /* PostService.swift */,
 				DF425BDD2BCFFAAA004799CF /* PostServiceManager.swift */,
 			);
 			path = Network;
@@ -396,7 +385,7 @@
 		DFFD56082BD2339800D71BAC /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				DFFD56092BD233A400D71BAC /* Tokens.swift */,
+				DFFD56092BD233A400D71BAC /* FeedToken.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -578,7 +567,6 @@
 				DF01037B2BD0F5AF00E3B3A8 /* Coordinator.swift in Sources */,
 				DF5F16F92BCE9A5F009792B2 /* AppDelegate.swift in Sources */,
 				DF425BB42BCF9D95004799CF /* FeedServiceManager.swift in Sources */,
-				DFFD56032BD13C1B00D71BAC /* ErrorView.swift in Sources */,
 				DF425BCA2BCFB827004799CF /* GradientView.swift in Sources */,
 				DF425BB02BCF8E2C004799CF /* ResponseHandler.swift in Sources */,
 				DF425BA12BCEBA67004799CF /* NetworkProvider.swift in Sources */,
@@ -598,7 +586,7 @@
 				DF425BAB2BCEE20F004799CF /* PostService.swift in Sources */,
 				DF425BAE2BCF8B62004799CF /* SocialClubServiceType.swift in Sources */,
 				DF425BA32BCEBC11004799CF /* ProfileService.swift in Sources */,
-				DFFD560A2BD233A400D71BAC /* Tokens.swift in Sources */,
+				DFFD560A2BD233A400D71BAC /* FeedToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

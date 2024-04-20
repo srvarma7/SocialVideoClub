@@ -14,7 +14,6 @@ class ProfileHeaderView: UIView {
         let iv = UIImageView()
         iv.layer.cornerRadius = 20
         iv.layer.masksToBounds = true
-        //        iv.image = .test
         iv.contentMode = .scaleAspectFill
         iv.layer.shadowColor = UIColor.black.cgColor
         return iv
