@@ -85,9 +85,9 @@ The application has 3 screens
     - Player caching can be implemented for prefetching the player item for extra smooth UX and reduce hitch time.
     - Play duration progress can be saved to continue the progress when viewed again according to the business logic.
     - Addition of Texture/AsyncDisplayKit/IGListKit for rendering collection UI can hugely enhance the performance and scalability.
-    - Additions of a toggle to enable/disable auto play.
+    - Addition of a toggle to enable/disable auto play.
     - Mute/unmute button.
-    - Long press to pause/play video.
+    - Long press/release to pause/play video.
     
 
 # Callout
